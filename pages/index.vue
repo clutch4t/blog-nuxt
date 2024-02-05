@@ -22,15 +22,16 @@
 
 <script setup lang='ts'>
 import { ref, computed } from 'vue'
+import { IPost } from '~/types';
 
 const loading = ref(true);
 
 const searchQuery = ref('');
 
 const filteredPosts = ref([])
-const posts = ref([] as Array<any>)
+const posts = ref([] as Array<IPost>)
 
-const page = ref(1);
+const page = ref(0);
 const limit = ref(10)
 
 const target = ref(null)
@@ -58,7 +59,7 @@ async function fetchPosts() {
           method: 'GET',
           lazy: false,
         })
-        const data = await response.json();
+        posts.value = [...posts.value, ...response.data];
       } catch (error) {
         console.log((error as Error).message);
       } finally {

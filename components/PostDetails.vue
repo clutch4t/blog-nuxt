@@ -22,8 +22,9 @@
 </template>
 
 <script setup lang='ts'>
+import { IComment } from "~/types";
 
-    const postComments = ref([] as Array<any>)
+    const postComments = ref([] as Array<IComment>)
 
     const { post } = defineProps(['post'])
 
